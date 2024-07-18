@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<head>
+	<title>Book Event</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="style3.css">
+	<script> 
+		var event, number, date, hall, menu, allergy, food, decoration;
+		function _(x) {
+			return document.getElementById(x);
+		}
+		function phase1() {
+			event = _("eventName").value;
+			number = _("people").value;
+			date = _("date").value;
+			if(event.length>2 && number.length>2 && date.length>2) {
+				_("tab1").style.display = "none"; //stops displaying first tab
+				_("tab2").style.display = "block"; //starts displaying second tab
+			}
+			else
+			{
+				alert("Please fill in the fields");
+			}
+		}
+		function phase2() {
+			hall = _("selectHall").value;
+			if(hall.length>0) {
+				_("tab2").style.display = "none";
+				_("tab3").style.display = "block"; 
+			}
+			else
+			{
+				alert("Please choose the hall");
+			}
+		}
+		function phase3() {
+			menu = _("chooseMenu").value;
+			allergy = _("allergies").value;
+			food = _("food").value;
+			if(menu.length>0 && allergy.length>2 && food.length>2) {
+				_("tab3").style.display = "none"; 
+				_("tab4").style.display = "block"; 
+			}
+			else
+			{
+				alert("Please fill in the fields");
+			}
+		}
+		function phase4() {
+			decoration = _("decoration").value;
+			if(decoration.length>0) {
+				_("tab4").style.display = "none";
+				_("display").style.display = "block";
+				_("display_event").innerHTML = event;
+				_("display_number").innerHTML = number;
+				_("display_date").innerHTML = date;
+				_("display_hall").innerHTML = hall;
+				_("display_menu").innerHTML = menu;
+				_("display_allergy").innerHTML = allergy;
+				_("display_food").innerHTML = food;
+				_("display_decoration").innerHTML = decoration;
+				 
+			}
+			else
+			{
+				alert("Please choose your decoration");
+			}
+		}
+		function pdfgen() {
+     	var makepdf = document.getElementById("display");
+        var mywindow = window.open("", "PRINT", 
+                "height=600,width=800");
+                mywindow.document.write(display.innerHTML);
+                mywindow.document.close();
+                mywindow.focus();
+                mywindow.print();
+                return true;
+		}
+		function submitForm() {
+			_("multitab").method = "post";
+			_("multitab").action = "bookings.php";
+			_("multitab").action = "Submit.html";
+			_("multitab").submit();
+		}	
+	</script>
+</head>
+<body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+	<nav class="navbar">
+		<div class="brand-title">EMS</div>
+		<div class="navbar-links">
+			<ul>
+				<li><a href="home.html">Home</a></li>
+				<li><a href="#">Booking</a></li>
+				<li><a href="Venues.php">Our Services</a></li>
+				<li><a href="project.php">Log In</a></li>
+				<li><a href="register.php">Register</a></li>
+
+			</ul>
+		</div>
+	</nav>
+
+	
+	<h2><strong>Book Your Event</strong></h2>
+		<form class="form" id = "multitab" onsubmit="return false" action="bookings.php">
+			<div class="container">
+				<div id ="tab1">
+				<fieldset>
+					<div class="form-card">
+						<legend>Booking</legend>
+						<p>
+						<label>Event Type: </label><br>
+						<select name="event" id="eventName">
+							<option>Wedding</option>
+							<option>Birthday</option>
+							<option>Business Meeting/Conference</option>
+						</select>
+						</p><br>
+						<label>Number of people: </label><br>
+						<input type="text" id="people" name="number"> <br><br>
+						<label> Date: </label><br>
+						<input type="date" id="date" name="date"> <br><br> </p>
+					</div>
+				<button onclick="phase1()" class="next action-button">Next</button>
+				</fieldset>
+			</div>
+		</div>
+
+			<div id="tab2">
+				<div class="title1"><h3>Select Your Hall</h3></div>
+			<div class="row">
+				<div class="column">
+						 <image src="hall1" alt="hall1" class="img-fluid" style="width:100%"><div class="myDIV"> Hall 1 </div></image>
+	    					<div class= "hide">
+	    						<h2>Royal Banquet Hall</h2>
+								<p><em>Location:</em> 33 Jenning Street</p>
+								<p><em>Contact information:</em> 647-181-8322</p>
+							</div>
+						</div>
+				<div class="column">
+					<image src="hall2" alt="hall2" class="img-fluid" style="width:100%"><div class="myDIV"> Hall 2</div></image>
+					<div class= "hide">
+    						<h2>Queens Confrence Hall</h2>
+							<p><em>Location:</em> 31 Thickson Road</p>
+							<p><em>Contact information</em> 905-666-7777</p>
+						</div>
+				</div>
+				<div class="column">
+					<image src="hall3" alt="hall2" class="img-fluid" style="width:100%"><div class="myDIV"> Hall 3</div></image>
+						<div class= "hide">
+							<h2>Royal Banquet Hall</h2>
+							<p><em>Location:</em> 33 Jenning Street</p>
+							<p><em>Contact information:</em> 987-567-2334</p>
+					</div>
+				</div>
+			</div>
+
+			<br>
+			<input type="radio" name="hall" id="selectHall">
+		  	<label>Hall 1</label>
+		    <input type="radio" name="hall" id="selectHall">
+		    <label>Hall 2</label>  
+		    <input type="radio" name="hall" id="selectHall">
+		    <label>Hall 3 </label> <br>
+		    <button  onclick="history.go(tab1)" class="action-button-previous">Back</button>
+		    <button onclick="phase2()" class="next action-button">Next</button>
+		</div>
+
+		<div id="tab3">
+			<div class="title1"><h3>Catering</h3></div>
+			<div class="container1">
+			<div class="icon"><i class="fa fa-info" aria-hidden="true"></i></div>
+				<div class="box">	
+				<h3>Menu A</h3>
+				<hr> <br>
+				<div class="menu_title">Salad</div>
+				<p>BEANS <br>Green bean quinoa, naval oranges</p>
+				<div class="menu_title">Entree</div>
+				<p>OVEN ROASATED SALMON FILET<br> With smoked tomatoes, local wheat berry salad & fresh seasonal vegetables</p>
+				<div class="menu_title">Dessert</div>
+				<p>CREME BRULEE</p>
+				</div>
+			</div>
+
+			<div class="container1">
+				<div class="box"> 
+				<h3>Menu B</h3>
+				<hr> <br>
+				<div class="menu_title">Salad</div>
+				<p>TOMATO CAPRESE<br>Sliced tomatoes with fresh mozarella, basil, and a balsamic glaze</p>
+				<div class="menu_title">Entree</div>
+				<p>ROASTED BEEF <br> With roast potatoes and onion gravy</p>
+				<div class="menu_title">Dessert</div>
+				<p>CREME BRULEE<br>Traditional creme brulee served with vanilla bean ice cream and biscotti</p>
+				</div>
+			</div>
+
+			<div class="container1">
+				<div class="box">
+					<div class="icon"><i class="fa" aria-hidden="true"></i></div>
+				<h3>Menu C</h3>
+				<hr> <br>
+				<div class="menu_title">Salad</div>
+				<p>FIELD GRASS <br> With pistachio crusted goat cheese and raspberries, citrus vinaigrette</p>
+				<div class="menu_title">Entree</div>
+				<p>CHICKEN ROULADE<br> Free range chicken breast with asparagus & parsely, served with roasted seasonal vegetables</p>
+				<div class="menu_title">Dessert</div>
+				<p>DUTCH APPLE PIE</p>
+				</div>
+			</div>
+			<br>
+			<br>
+			<label>Menu</label><br>
+			<select name="menu" id="chooseMenu">
+				<option>Select...</option>
+				<option>Menu A</option>
+				<option>Menu B</option>
+				<option>Menu C</option>
+			</select>
+
+			<br><label>Allergies</label><br>
+			<input type="text" name="allergies" id="allergies"><br>
+			<label>Special food requests</label><br>
+			<input type="text" name="spFood" id="food"> <br>
+			<button  id="progress-prev" onclick="history.go(tab2)" class="previous action-button-previous">Back</button>
+			<button id="progress-next" onclick="phase3()" class="next action-button"> Next</button>
+		</div>
+
+		<div id="tab4">
+			<div class="title1"><h3>Choose decoration</h3></div>
+			<div class="row">
+				<div class="column">
+					<image src="deco1.jpg" alt="decoration" style="width:100%"> Option 1</image> </a>
+				</div>
+				<div class="column">
+					<image src="deco2" alt="decoration" style="width:100%"> Option 2</image>
+				</div>
+				<div class="column">
+					<image src="deco3" alt="decoration" style="width:100%"> Option 3</image>
+				</div>
+			</div>
+
+			<label>Decoration</label><br>
+			<select name="decoration" id="decoration">
+				<option>Select...</option>
+				<option>Option 1</option>
+				<option>Option 2</option>
+				<option>Option 3</option>
+			</select> <br>
+			<button onclick="history.go(tab3)"  class="action-button-previous">Back</button>
+			<button id="progress-next" onclick="phase4()" class="next action-button">Next</button>
+		</div>
+
+		<div id="display">
+			<strong>Event Type: </strong><span id="display_event"></span> <br>
+			<strong>Number of people: </strong><span id="display_number"></span><br>
+			<strong>Date: </strong><span id="display_date"></span><br>
+			<strong>Hall: </strong><span id="display_hall"></span><br>
+			<strong>Menu: </strong><span id="display_menu"></span><br>
+			<strong>Any Allergies? </strong><span id="display_allergy"></span><br>
+			<strong>Special food requests: </strong><span id="display_food"></span><br>
+			<strong>Decoration: </strong><span id="display_decoration"></span><br>
+
+			<div class="btns-group">
+				 <button id="progress-prev" onclick="history.go(tab4)" class="action-button-previous">Back</button>
+	            <button class="next action-button" onclick ="pdfgen()">Generate PDF</button>
+		<button  class="next action-button" onclick="submitForm()">Submit Data</button>
+		</div>
+</div>
+</div>
+</form>
+</body>

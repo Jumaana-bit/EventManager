@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="HomeStyle.css">
+</head>
+<body>
+
+  <nav class="navbar">
+		<div class="brand-title">EMS</div>
+    <div class="navbar-links">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="form.html">Booking</a></li>
+            <li><a href="Venues.php">Our Services</a></li>
+            <li><a href="project.php">Log In</a></li>
+            <li><a href="register.php">Register</a></li>
+        </ul>
+    </div>
+    </nav>
+
+
+<div class="slideshow">
+    <div class="Slides">
+      <div class="numbertext">1 / 3</div>
+      <img src="Weddings.png" style="width:100%">
+    </div>
+  
+    <div class="Slides">
+      <div class="numbertext">2 / 3</div>
+      <img src="Bparty.png" style="width:100%">
+   </div>
+  
+    <div class="Slides">
+      <div class="numbertext">3 / 3</div>
+      <img src="CorporateEvent.png" style="width:100%">
+    </div>
+
+    <a class="prev" onclick="plusSlides(-1)"></a>
+    <a class="next" onclick="plusSlides(1)"></a>
+  </div>
+  
+   <div style="text-align:center">
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+  </div>
+</div>
+
+  <script>
+
+let slide = 0;
+showSlides();
+
+function plusSlides(m) {
+  showSlides(slide += m);
+}
+
+function currentSlide(m) {
+  showSlides(slide = m);
+}
+
+function showSlides() {
+  let i;
+  let slides = document.getElementsByClassName("Slides");
+  let dots = document.getElementsByClassName("dot");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  slide++;
+  if (slide > slides.length) {slide = 1}    
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slide-1].style.display = "block";  
+  dots[slide-1].className += " active";
+  setTimeout(showSlides, 2500); // Change image every 2.5 seconds
+}
+
+</script>
+
+<footer>
+  <p>Contact Us<br>
+  <a href="mailto:EMS@hotmail.com">EMS@hotmail.com</a></p>
+</footer>
+
+  </body>
+
+  </html>
+
+
+
